@@ -8,24 +8,39 @@ public class LogEntryAnalyzer {
 
 
     public void add(LogEntry logEntry){
-        // TODO: Fügt ein neues logEntry in die Liste (logentries) ein
+        logEntries.add(logEntry);
     }
 
     public int getCountErrors(){
-        // TODO: Diese Methode soll die Anzahl der Logentry-Einträge retournieren
-        return 0;
+        int count = 0;
+        for (LogEntry logEntry : logEntries) {
+            count++;
+        }
+        return count;
     }
 
     public double getAverageFileSize(){
+        double divider = 0;
+        double sizeSum = 0;
         // TODO: Retourniert die durchschnittliche fileSize über alle Logentries hinweg
-
-        return 0;
+        for (LogEntry logEntry : logEntries) {
+            sizeSum += logEntry.etFileSize();
+            divider++;
+        }
+        return sizeSum / divider;
     }
 
     public HashMap<String, Integer> getCountByIPAddress(){
         // TODO: Liefert je applicationName, die Anzahl der LogEinträge zurück
-
-        return null;
+        HashMap<String, Integer> result = new HashMap<>();
+        for (LogEntry logEntry : logEntries) {
+            if (result.containsKey(logEntry.getiPAddress())) {
+                result.put(logEntry.getiPAddress(), result.get(logEntry.getiPAddress()) + 1);
+            } else {
+                result.put(logEntry.getiPAddress(), 1);
+            }
+        }
+        return result;
     }
 
 }
